@@ -25,3 +25,210 @@ body {
 @media screen and (min-width: 600px){
       	body { background-color: blue;}
       }
+749
+804
+<!-- Start with the browser in a very small setting with chrome tools open
+	 drag and increase the width until the content tells you that you should
+	 create a breakpoint.
+	 An example would be if there seems to be too much space between some icons
+	 or images on the page. -->
+<!-- Small(phone) to Medium(tablet) to Large(desktop) is a good start for breakpoints. That's 2 breakpoints. -->
+
+
+<!-- Here's a more complex media query L3-13 -->
+@media screen and (min-width: 500px) and (max-width: 600px){
+	.yes {
+		opacity: 1;
+	}
+	.no {
+		opacity: 0;
+	}
+}
+
+<!-- Flex box is way cooler than you remember
+	 Use it! and flex and order for great responsiveness -->
+
+
+<!-- Pattern - Column Drop Example
+_______________________________-->
+<div class="container">
+	<div class="box dark_blue"></div>
+	<div class="box light_blue"></div>
+	<div class="box green"></div>
+</div>
+
+<!-- CSS -->
+<style type="text/css">
+	.container {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.box {
+		width: 100%;
+	}
+
+	@media screen and (min-width: 450px) {
+		.dark_blue {
+			width: 25%;
+		}
+		.light_blue {
+			width: 75%;
+		}
+	}
+
+	@media screen and (min-width: 550px) {
+		.dark_blue, .green {
+			width: 25%;
+		}
+		.light_blue {
+			width: 50%;
+		}
+	}
+
+</style>
+
+<!-- Pattern - Mostly Fluid Example
+_______________________________-->
+<div class="container">
+	<div class="box dark_blue"></div>
+	<div class="box light_blue"></div>
+	<div class="box green"></div>
+	<div class="box red"></div>
+	<div class="box orange"></div>
+</div>
+
+<!-- CSS -->
+<style type="text/css">
+	.container {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.box {
+		width: 100%;
+	}
+
+	@media screen and (min-width: 450px) {
+		.light_blue, .green {
+			width: 50%;
+		}
+	}
+
+	@media screen and (min-width: 550px) {
+		.dark_blue, .light_blue {
+			width: 50%;
+		}
+		.green, .red, .orange {
+			width: 33%;
+		}
+	}
+
+	@media screen and (min-width: 700px) {
+		.container {
+			width: 700px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	}
+</style>
+
+<!-- Pattern - Layout Shifter Example
+_______________________________-->
+<div class="container">
+	<div class="box dark_blue"></div>
+	<div class="container" id="container2">
+		<div class="box light_blue"></div>
+		<div class="box green"></div>
+	</div>
+	<div class="box red"></div>
+</div>
+
+<style type="text/css">
+	.container {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.box {
+		width: 100%;
+	}
+
+	@media screen and (min-width: 500px) {
+		.dark_blue {
+			width: 50%;
+		}
+		#container2 {
+			width: 50%;
+		}
+	}
+
+	@media screen and (min-width: 600px) {
+		.red {
+			width: 25%;
+			order: -1;
+		}
+		#container2 {
+			width: 50%;
+		}
+		.dark_blue {
+			width: 25%;
+			order: 1;
+		}
+	}
+</style>
+
+<!-- Pattern - Off Canvas Example 
+______________________________-->
+https://classroom.udacity.com/courses/ud893/lessons/3561069759/concepts/35307193050923
+
+http://udacity.github.io/RWDF-samples/Lesson4/patterns/off-canvas.html
+
+<nav id="drawer" class="dark_blue">
+</nav>
+
+<main class="light_blue">
+</main>
+
+<style type="text/css">
+	html, body, main {
+		height: 100%;
+		width: 100%;
+	}
+
+	nav {
+		width: 300px;
+		height: 100%;
+		position: absolute;
+		transform: translate(-300px, 0);
+		transition: transform 0.3s ease;
+	}
+
+	nav.open {
+		transform: translate(0, 0);
+	}
+
+	@media screen and (min-width: 600px) {
+		nav {
+			position: relative;
+			transform: translate(0, 0);
+		}
+		body {
+			display: flex;
+			flex-flow: row nowrap;
+		}
+		main {
+			width: auto;
+			flex-grow: 1;
+		}
+	}
+</style>
+
+<!-- More on stopPropagation: https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Examples#Example_5:_Event_Propagation -->
+<script type="text/javascript">
+	menu.addEventListener('click', function(e) {
+		drawer.classList.toggle('open');
+		e.stopPropagation();
+	});
+</script>
